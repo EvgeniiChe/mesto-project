@@ -1,0 +1,6 @@
+.card__name-area {
+  display: flex;
+  justify-content: space-between;
+  margin: 22px 15px 28px 21px;
+  padding: 0;
+}
