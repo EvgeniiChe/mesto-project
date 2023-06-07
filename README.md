@@ -3,6 +3,7 @@
 ### Обзор
 * Интро
 * Методология реализации
+* Ссылка на GitHub
 
 
 **Интро**
@@ -16,6 +17,9 @@
 * Flexbox layout
 * Media queries
 * The Nested BEM methodology
-* Form
-* Modal window
+* Forms
+* Modal windows
 
+**Ссылка на GitHub**
+
+[https://evgeniiche.github.io/mesto-project/](https://evgeniiche.github.io/mesto-project/)
