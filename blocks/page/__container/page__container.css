@@ -2,3 +2,17 @@
   max-width: 880px;
   margin: 0 auto 0 auto;
 }
+
+@media screen and (max-width: 880px) { 
+  .page__container {
+    margin-left: 19px;
+    margin-right: 19px;
+  }
+}
+
+@media screen and (max-width: 640px) { 
+  .page__container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

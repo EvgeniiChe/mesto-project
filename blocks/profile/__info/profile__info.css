@@ -1,6 +1,9 @@
 .profile__info {
-  margin: 62px 0 76px 146.25px;
+  margin: 0;
   padding: 0;
+  position: relative;
+  left: -22.5px;
+  margin-top: 62px;
 }
 
 @media screen and (max-width: 680px) { 
@@ -8,6 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: static;
     margin: 0;
   }
 }

@@ -1,17 +1,13 @@
 .profile__avatar-place {
-  margin: 0;
+  margin: 36.25px 0 47.25px 0;
+  position: relative;
   height: 127.5px;
-  position: absolute;
-  top: 36.25px;
   left: -22.5px;
 }
   
 @media screen and (max-width: 680px) { 
   .profile__avatar-place {
-    margin-top: 38.25px;
-    margin-bottom: 22.25px;
-    position: inherit;
-    top: 0;
-    left: 0;
+    position: static;
+    margin: 38.25px auto 22.25px auto;
   }
 }
