@@ -1,8 +1,6 @@
 .profile__info {
   margin: 0;
   padding: 0;
-  position: relative;
-  left: -22.5px;
   margin-top: 62px;
 }
 
@@ -11,7 +9,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: static;
     margin: 0;
   }
 }
