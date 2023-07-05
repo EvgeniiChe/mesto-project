@@ -1,15 +1,17 @@
 //Открытие и закрытие модальных окон
 const popupEditProfile = document.querySelector('.popup-edit-profile');
 const popupAddPlace = document.querySelector('.popup-add-place');
-const closePopupEditProfileButton = popupEditProfile.querySelector('.popup__close');
-const closePopupAddPlaceButton = popupAddPlace.querySelector('.popup__close');
 const profile = document.querySelector('.profile');
 const editProfileButton = profile.querySelector('.profile__edit-button');
 const addMestoButton = profile.querySelector('.profile__add-mesto');
-
 const openPhotoClick = document.querySelector('.popup-view-photo__image');
 const popupViewPhoto = document.querySelector('.popup-view-photo');
+const closePopupEditProfileButton = popupEditProfile.querySelector('.popup__close');
+const closePopupAddPlaceButton = popupAddPlace.querySelector('.popup__close');
 const closePopupPhotoButton = popupViewPhoto.querySelector('.popup__close');
+const popupImg = popupViewPhoto.querySelector('.popup-view-photo__image');
+const popupCaption = popupViewPhoto.querySelector('.popup-view-photo__caption');
+const popupAddPlaceForm = popupAddPlace.querySelector('.popup__form');
 
 function openPopupViewPhoto() {
     popupViewPhoto.classList.add('popup-view-photo_opened');
@@ -43,17 +45,17 @@ inputUserName.value = profile.getElementsByTagName("h1")[0].textContent;
 inputUserCaption.value = profile.getElementsByTagName("p")[0].textContent;
 
 //Сохранение введенных значений редактирования профиля (имени и профессии)
-const submitPopupButton = document.querySelector('.popup__submit');
+const popupFormEditProfile = popupEditProfile.querySelector('.popup-form-edit-profile');
 const userName = profile.querySelector('.profile__name');
 const userCaption = profile.querySelector('.profile__caption');
-function formSubmitHandler (evt) {
-  evt.preventDefault(); 
+popupFormEditProfile.addEventListener('submit', (event) => {
+  event.preventDefault(); 
   userName.textContent = inputUserName.value;
   userCaption.textContent = inputUserCaption.value;
-}
-submitPopupButton.addEventListener('submit', formSubmitHandler);
+  closePopupEditProfile();
+})
 
-//Шесть карточек при загрузке
+//Массив с данными карточек
 const initialCards = [
     {
       name: 'Архыз',
@@ -80,58 +82,65 @@ const initialCards = [
       link: 'images/baikal.jpg'
     }
     ];
+    
 const cardTemplate = document.querySelector('#card').content;
 const allCards = document.querySelector('.cards');
-initialCards.forEach(function addCard(item, index) {
-    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-    cardElement.querySelector('.card__image').src = `${initialCards[index].link}`;
-    cardElement.querySelector('.card__image').alt = `Фотография ${initialCards[index].link}`;
-    cardElement.querySelector('.card__name').textContent = `${initialCards[index].name}`;
-    allCards.append(cardElement);
-      });
-
-
-//Добавление новой карточки
-const addCardButton = popupAddPlace.querySelector('.popup__submit');
-const inputCardName = document.getElementById('card-name-input');
-const inputCardImage = document.getElementById('card-image-input');
-function addCardHandler (evt) {
-  evt.preventDefault();
-  initialCards.unshift({
-    name: `${inputCardName.value}`,
-    link: `${inputCardImage.value}`
-  })
-  addCard(initialCards[0]);
-}
-addCardButton.addEventListener('submit', addCardHandler);
-
-//Удаление карточки
-document.querySelector('.card__trash-icon').addEventListener('click', function (evt) {  
-  evt.target.initialCards.remove();
-});
+const operationsCardItem = (cardInfo) => {
+//Клонирование карточек и наполнение содержимым
+  const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
+  const cardName = cardItem.querySelector('.card__name');
+  const cardImg = cardItem.querySelector('.card__image');
+  cardImg.src = cardInfo.link;
+  cardImg.alt = `Фотография ${cardInfo.name}`;
+  cardName.textContent = cardInfo.name;
 
 //Открытие и закрытие попапа с картинкой
-const cardImg = document.querySelector('.card__image');
-const popupImg = popupViewPhoto.querySelector('.popup-view-photo__image');
-const popupCaption = popupViewPhoto.querySelector('.popup-view-photo__caption');
-const cardName = document.querySelector('.card__name');
-cardImg.addEventListener('click', function (evt) {
-  popupViewPhoto.classList.add('popup-view-photo_opened');
-  popupImg.src = evt.target.src;
-  popupImg.alt = cardName.textContent;
-  popupCaption.textContent = cardName.textContent;
-});
+  cardImg.addEventListener('click', () => {
+    popupViewPhoto.classList.add('popup-view-photo_opened');
+    popupImg.src = cardImg.src;
+    popupImg.alt = cardName.textContent;
+    popupCaption.textContent = cardName.textContent;
+  })
 
 //Лайки
-const likeButton = document.querySelector('.card__like');
-likeButton.addEventListener('click', function (evt) {
-  evt.target.classList.toggle('card__like_active');
-});
+  const likeButton = cardItem.querySelector('.card__like');
+  const addLike = () => {
+    likeButton.classList.toggle('card__like_active');
+  }
+  likeButton.addEventListener('click', addLike);
 
+//Удаление карточки
+  const trashIconButton = cardItem.querySelector('.card__trash-icon');
+  const deleteCard = () => {
+    cardItem.remove();
+  }
+  trashIconButton.addEventListener('click', deleteCard);
 
+  return cardItem;
+}
 
+//Отображение карточек на странице
+initialCards.forEach((item) => {
+    const cardItem = operationsCardItem(item);
+    allCards.append(cardItem);
+  })
 
+const renderCardItem = (cardItem) => {
+    allCards.prepend(cardItem);
+}
 
-
-
-
+//Добавление карточки
+const addCardHandler = (evt) => {
+  evt.preventDefault();
+  const inputCardName = document.getElementById('card-name-input');
+  const inputCardImage = document.getElementById('card-image-input');
+  const name = inputCardName.value;
+  const link = inputCardImage.value;
+  const initialCardsNew = {
+    name,
+    link
+  }
+  renderCardItem(operationsCardItem(initialCardsNew));
+  closePopupAddPlace();
+}
+popupAddPlaceForm.addEventListener('submit', addCardHandler);
