@@ -14,6 +14,11 @@ const popupCaption = popupViewPhoto.querySelector('.popup-view-photo__caption');
 const popupAddPlaceForm = popupAddPlace.querySelector('.popup__form');
 const inputUserName = popupFormEditProfile.querySelector('.popup__username-input');
 const inputUserCaption = popupFormEditProfile.querySelector('.popup__caption-input');
+const userName = profile.querySelector('.profile__name');
+const userCaption = profile.querySelector('.profile__caption');
+const inputCardName = popupAddPlace.querySelector('.popup__card-name-input');
+const inputCardImage = popupAddPlace.querySelector('.popup__card-image-input');
+const closeButtons = document.querySelectorAll('.popup__close');
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
@@ -27,19 +32,16 @@ addMestoButton.addEventListener('click', () => {
 })
 editProfileButton.addEventListener('click', () => {
     openPopup(popupEditProfile);
-    inputUserName.value = profile.getElementsByTagName("h1")[0].textContent;
-    inputUserCaption.value = profile.getElementsByTagName("p")[0].textContent;
+    inputUserName.value = userName.textContent;
+    inputUserCaption.value = userCaption.textContent;
   })
 
-const closeButtons = document.querySelectorAll('.popup__close');
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 })
 
 //Сохранение введенных значений редактирования профиля (имени и профессии)
-const userName = profile.querySelector('.profile__name');
-const userCaption = profile.querySelector('.profile__caption');
 popupFormEditProfile.addEventListener('submit', (event) => {
   event.preventDefault(); 
   userName.textContent = inputUserName.value;
@@ -88,7 +90,7 @@ const createCard = (cardInfo) => {
 
 //Открытие попапа с картинкой
   cardImg.addEventListener('click', () => {
-    popupViewPhoto.classList.add('popup_opened');
+    openPopup(popupViewPhoto);
     popupImg.src = cardImg.src;
     popupImg.alt = cardName.textContent;
     popupCaption.textContent = cardName.textContent;
@@ -124,8 +126,6 @@ const renderCardItem = (cardItem) => {
 //Добавление карточки
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-  const inputCardName = popupAddPlace.querySelector('.popup__card-name-input');
-  const inputCardImage = popupAddPlace.querySelector('.popup__card-image-input');
   const name = inputCardName.value;
   const link = inputCardImage.value;
   const initialCardsNew = {
