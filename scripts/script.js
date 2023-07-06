@@ -1,58 +1,50 @@
-//Открытие и закрытие модальных окон
 const popupEditProfile = document.querySelector('.popup-edit-profile');
+const popupFormEditProfile = popupEditProfile.querySelector('.popup-form-edit-profile');
 const popupAddPlace = document.querySelector('.popup-add-place');
 const profile = document.querySelector('.profile');
 const editProfileButton = profile.querySelector('.profile__edit-button');
 const addMestoButton = profile.querySelector('.profile__add-mesto');
-const openPhotoClick = document.querySelector('.popup-view-photo__image');
 const popupViewPhoto = document.querySelector('.popup-view-photo');
+const openPhotoClick = popupViewPhoto.querySelector('.popup-view-photo__image');
 const closePopupEditProfileButton = popupEditProfile.querySelector('.popup__close');
 const closePopupAddPlaceButton = popupAddPlace.querySelector('.popup__close');
 const closePopupPhotoButton = popupViewPhoto.querySelector('.popup__close');
 const popupImg = popupViewPhoto.querySelector('.popup-view-photo__image');
 const popupCaption = popupViewPhoto.querySelector('.popup-view-photo__caption');
 const popupAddPlaceForm = popupAddPlace.querySelector('.popup__form');
+const inputUserName = popupFormEditProfile.querySelector('.popup__username-input');
+const inputUserCaption = popupFormEditProfile.querySelector('.popup__caption-input');
 
-function openPopupViewPhoto() {
-    popupViewPhoto.classList.add('popup-view-photo_opened');
+function openPopup(popup) {
+    popup.classList.add('popup_opened');
 }
-function closePopupViewPhoto() {
-    popupViewPhoto.classList.remove('popup-view-photo_opened');
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
 }
-function openPopupEditProfile() {
-    popupEditProfile.classList.add('popup_opened');
-}
-function openPopupAddPlace() {
-    popupAddPlace.classList.add('popup_opened');
-}
-function closePopupEditProfile() {
-    popupEditProfile.classList.remove('popup_opened');
-}
-function closePopupAddPlace() {
-    popupAddPlace.classList.remove('popup_opened');
-}
-openPhotoClick.addEventListener('click', openPopupViewPhoto);
-editProfileButton.addEventListener('click', openPopupEditProfile);
-addMestoButton.addEventListener('click', openPopupAddPlace);
-closePopupPhotoButton.addEventListener('click', closePopupViewPhoto);
-closePopupEditProfileButton.addEventListener('click', closePopupEditProfile);
-closePopupAddPlaceButton.addEventListener('click', closePopupAddPlace);
 
-//Вставка текущих значений профиля (имени и профессии) в соответствующие поля модального окна
-const inputUserName = document.getElementById('username-input');
-const inputUserCaption = document.getElementById('caption-input');
-inputUserName.value = profile.getElementsByTagName("h1")[0].textContent;
-inputUserCaption.value = profile.getElementsByTagName("p")[0].textContent;
+addMestoButton.addEventListener('click', () => {
+    openPopup(popupAddPlace);
+})
+editProfileButton.addEventListener('click', () => {
+    openPopup(popupEditProfile);
+    inputUserName.value = profile.getElementsByTagName("h1")[0].textContent;
+    inputUserCaption.value = profile.getElementsByTagName("p")[0].textContent;
+  })
+
+const closeButtons = document.querySelectorAll('.popup__close');
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+})
 
 //Сохранение введенных значений редактирования профиля (имени и профессии)
-const popupFormEditProfile = popupEditProfile.querySelector('.popup-form-edit-profile');
 const userName = profile.querySelector('.profile__name');
 const userCaption = profile.querySelector('.profile__caption');
 popupFormEditProfile.addEventListener('submit', (event) => {
   event.preventDefault(); 
   userName.textContent = inputUserName.value;
   userCaption.textContent = inputUserCaption.value;
-  closePopupEditProfile();
+  closePopup(popupEditProfile);
 })
 
 //Массив с данными карточек
@@ -82,10 +74,10 @@ const initialCards = [
       link: 'images/baikal.jpg'
     }
     ];
-    
+
 const cardTemplate = document.querySelector('#card').content;
 const allCards = document.querySelector('.cards');
-const operationsCardItem = (cardInfo) => {
+const createCard = (cardInfo) => {
 //Клонирование карточек и наполнение содержимым
   const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
   const cardName = cardItem.querySelector('.card__name');
@@ -94,9 +86,9 @@ const operationsCardItem = (cardInfo) => {
   cardImg.alt = `Фотография ${cardInfo.name}`;
   cardName.textContent = cardInfo.name;
 
-//Открытие и закрытие попапа с картинкой
+//Открытие попапа с картинкой
   cardImg.addEventListener('click', () => {
-    popupViewPhoto.classList.add('popup-view-photo_opened');
+    popupViewPhoto.classList.add('popup_opened');
     popupImg.src = cardImg.src;
     popupImg.alt = cardName.textContent;
     popupCaption.textContent = cardName.textContent;
@@ -121,7 +113,7 @@ const operationsCardItem = (cardInfo) => {
 
 //Отображение карточек на странице
 initialCards.forEach((item) => {
-    const cardItem = operationsCardItem(item);
+    const cardItem = createCard(item);
     allCards.append(cardItem);
   })
 
@@ -130,17 +122,18 @@ const renderCardItem = (cardItem) => {
 }
 
 //Добавление карточки
-const addCardHandler = (evt) => {
+const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-  const inputCardName = document.getElementById('card-name-input');
-  const inputCardImage = document.getElementById('card-image-input');
+  const inputCardName = popupAddPlace.querySelector('.popup__card-name-input');
+  const inputCardImage = popupAddPlace.querySelector('.popup__card-image-input');
   const name = inputCardName.value;
   const link = inputCardImage.value;
   const initialCardsNew = {
     name,
     link
   }
-  renderCardItem(operationsCardItem(initialCardsNew));
-  closePopupAddPlace();
+  evt.target.reset();
+  renderCardItem(createCard(initialCardsNew));
+  closePopup(popupAddPlace);
 }
-popupAddPlaceForm.addEventListener('submit', addCardHandler);
+popupAddPlaceForm.addEventListener('submit', handleCardFormSubmit);

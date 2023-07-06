@@ -39,8 +39,8 @@
       <button class="popup__close" aria-label="Закрыть модальное окно" type="button"></button>
       <h2 class="popup__heading">Редактировать профиль</h2>
       <form class="popup__form popup-form-edit-profile" name="popup-form-edit-profile">
-        <input class="popup__input" id="username-input" type="text" name="username-input" placeholder="Введите имя" maxlength="500" required>
-        <input class="popup__input" id="caption-input" type="text" name="caption-input" placeholder="Введите вашу профессию" maxlength="500" required>
+        <input class="popup__input popup__username-input" id="username-input" type="text" name="username-input" placeholder="Введите имя" maxlength="500" required>
+        <input class="popup__input popup__caption-input" id="caption-input" type="text" name="caption-input" placeholder="Введите вашу профессию" maxlength="500" required>
         <button class="popup__submit" type="submit" aria-label="Сохранить">Сохранить</button>
       </form>
     </div>
@@ -50,20 +50,20 @@
       <button class="popup__close" aria-label="Закрыть модальное окно" type="button"></button>
       <h2 class="popup__heading">Новое место</h2>
       <form class="popup__form" name="popup-form-add-card">
-        <input class="popup__input" id="card-name-input" type="text" name="card-name-input" placeholder="Название" maxlength="500" required>
-        <input class="popup__input" id="card-image-input" type="text" name="card-image-input" placeholder="Ссылка на картинку" maxlength="500" required>
+        <input class="popup__input popup__card-name-input" id="card-name-input" type="text" name="card-name-input" placeholder="Название" maxlength="500" required>
+        <input class="popup__input popup__card-image-input" id="card-image-input" type="text" name="card-image-input" placeholder="Ссылка на картинку" maxlength="500" required>
         <button class="popup__submit" type="submit" aria-label="Создать">Создать</button>
       </form>
     </div>
   </section>
-  <section class="popup-view-photo">
+  <section class="popup popup-view-photo">
     <div class="popup-view-photo__container">
-      <button class="popup-view-photo__close popup__close" aria-label="Закрыть модальное окно" type="button"></button>
+      <button class="popup__close" aria-label="Закрыть модальное окно" type="button"></button>
       <img class="popup-view-photo__image" src="" alt="">
       <p class="popup-view-photo__caption"></p>
     </div>
   </section>
-  
+
   <template id="card">
     <article class="card">
       <img class="card__image" src="" alt="">
@@ -75,6 +75,6 @@
     </article>
   </template>
 
-  <script src="script.js"></script>
+  <script src="scripts/script.js"></script>
 </body>
 </html>
