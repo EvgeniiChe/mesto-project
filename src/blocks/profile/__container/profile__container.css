@@ -2,7 +2,6 @@
   margin: 0;
   display: flex;
   max-width: 508.5px;
-  align-items: start;
 }
   
 @media screen and (max-width: 680px) { 

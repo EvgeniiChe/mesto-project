@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mesto</title>
+</head>
+<body class="page">
+  <div class="page__container">
+    <header class="header">
+      <img class="header__logo" src="./images/logo.svg" alt="Логотип Mesto">
+    </header>
+    <main>
+      <section class="profile">
+        <div class="profile__container">
+          <div class="profile__avatar-place">
+            <img class="profile__avatar-image" src="./images/profile__avatar-image.jpg" alt="Аватарка">
+          </div>
+          <div class="profile__info">
+            <div class="profile__name-container">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__edit-button" aria-label="Редактировать профиль" type="button"></button>
+            </div>
+            <p class="profile__caption">Исследователь океана</p>
+          </div>
+        </div>
+        <button class="profile__add-mesto" aria-label="Добавить место" type="button"></button>
+      </section>
+      <section class="cards">
+      </section>
+    </main>
+      <footer class="footer">
+        <p class="footer__caption">© 2023 Mesto Russia</p>
+      </footer>
+  </div>
+  <section class="popup popup-edit-profile">
+    <div class="popup__container">
+      <button class="popup__close" aria-label="Закрыть модальное окно" type="button"></button>
+      <h2 class="popup__heading">Редактировать профиль</h2>
+      <form class="popup__form popup-form-edit-profile" name="popup-form-edit-profile" novalidate>
+        <input class="popup__input popup__username-input" id="username-input" pattern="^[a-zA-Zа-яёА-ЯЁ\-\s]+$" type="text" name="username-input" placeholder="Введите имя" autocomlete="off" minlength="2" maxlength="40" required data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы.">
+        <span id="error-username-input" class="popup__error popup__error_type_username"></span>
+        <input class="popup__input popup__caption-input" id="caption-input" pattern="^[a-zA-Zа-яёА-ЯЁ\-\s]+$" type="text" name="caption-input" placeholder="Введите вашу профессию" autocomplete="off" minlength="2" maxlength="200" required data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы.">
+        <span id="error-caption-input" class="popup__error popup__error_type_caption"></span>
+        <button class="popup__submit" type="submit" aria-label="Сохранить" disabled>Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup-add-place">
+    <div class="popup__container">
+      <button class="popup__close" aria-label="Закрыть модальное окно" type="button"></button>
+      <h2 class="popup__heading">Новое место</h2>
+      <form class="popup__form" name="popup-form-add-card" novalidate>
+        <input class="popup__input popup__card-name-input" id="card-name-input" pattern="^[a-zA-Zа-яёА-ЯЁ\-\s]+$" type="text" name="card-name-input" placeholder="Название" autocomlete="off" minlength="2" maxlength="30" required data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы.">
+        <span id="error-card-name-input" class="popup__error popup__error_type_card-name"></span>
+        <input class="popup__input popup__card-image-input" id="card-image-input" type="url" name="card-image-input" placeholder="Ссылка на картинку" autocomlete="off" required>
+        <span id="error-card-image-input" class="popup__error popup__error_type_link"></span>
+        <button class="popup__submit popup__submit-add-place" type="submit" aria-label="Создать" disabled>Создать</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup-view-photo">
+    <div class="popup-view-photo__container">
+      <button class="popup__close" aria-label="Закрыть модальное окно" type="button"></button>
+      <img class="popup-view-photo__image" src="" alt="">
+      <p class="popup-view-photo__caption"></p>
+    </div>
+  </section>
+
+  <template id="card">
+    <article class="card">
+      <img class="card__image" src="" alt="">
+      <button class="card__trash-icon" type="button"></button>
+      <div class="card__name-area">
+        <h2 class="card__name"></h2>
+        <button class="card__like" type="button"></button>
+      </div>
+    </article>
+  </template>
+
+</body>
+</html>

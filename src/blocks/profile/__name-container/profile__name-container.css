@@ -3,7 +3,6 @@
   display: flex;
   justify-content: space-between;
   max-width: 336px;
-  align-items: start;
 }
   
 @media screen and (max-width: 680px) { 
