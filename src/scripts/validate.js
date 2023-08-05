@@ -1,4 +1,11 @@
 import {validationSelectors} from '../index.js';
+
+export const disableSubmit = () => {
+  const button = document.querySelector('.popup__submit-add-place');
+  button.classList.add('popup__submit_disabled');
+  button.disabled = true;
+}
+
 const showInputError = (formElement, inputElement, errorMessage, {inputErrorClass, errorClass}) => {
   const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
   inputElement.classList.add(inputErrorClass);
