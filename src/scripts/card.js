@@ -1,7 +1,7 @@
-import {openPopup, closePopup, cardTemplate, popupViewPhoto, popupImg, popupCaption, inputCardName, inputCardImage, popupAddPlace} from '../index.js';
-import {disableSubmit} from './validate.js';
+import {cardTemplate, popupViewPhoto, popupImg, popupCaption} from '../index.js';
+import {openPopup} from './modal.js';
 
-const createCard = (cardInfo) => {
+export const createCard = (cardInfo) => {
 //Клонирование карточек и наполнение содержимым
   const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
   const cardName = cardItem.querySelector('.card__name');
@@ -35,18 +35,4 @@ const createCard = (cardInfo) => {
   return cardItem;
 }
 
-//Добавление карточки
-export const handleCardFormSubmit = (evt) => {
-    evt.preventDefault();
-    const name = inputCardName.value;
-    const link = inputCardImage.value;
-    const initialCardsNew = {
-      name,
-      link
-    }
-    evt.target.reset();
-    renderCardItem(createCard(initialCardsNew));
-    closePopup(popupAddPlace);
-    disableSubmit(popupAddPlace);
-}
 

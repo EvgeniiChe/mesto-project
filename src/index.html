@@ -8,13 +8,13 @@
 <body class="page">
   <div class="page__container">
     <header class="header">
-      <img class="header__logo" src="./images/logo.svg" alt="Логотип Mesto">
+      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип Mesto">
     </header>
     <main>
       <section class="profile">
         <div class="profile__container">
           <div class="profile__avatar-place">
-            <img class="profile__avatar-image" src="./images/profile__avatar-image.jpg" alt="Аватарка">
+            <img class="profile__avatar-image" src="<%=require('./images/profile__avatar-image.jpg')%>" alt="Аватарка">
           </div>
           <div class="profile__info">
             <div class="profile__name-container">
@@ -55,7 +55,7 @@
         <span id="error-card-name-input" class="popup__error popup__error_type_card-name"></span>
         <input class="popup__input popup__card-image-input" id="card-image-input" type="url" name="card-image-input" placeholder="Ссылка на картинку" autocomlete="off" required>
         <span id="error-card-image-input" class="popup__error popup__error_type_link"></span>
-        <button class="popup__submit popup__submit-add-place" type="submit" aria-label="Создать" disabled>Создать</button>
+        <button class="popup__submit" type="submit" aria-label="Создать" disabled>Создать</button>
       </form>
     </div>
   </section>

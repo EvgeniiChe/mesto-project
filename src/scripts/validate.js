@@ -1,10 +1,3 @@
-import {validationSelectors} from '../index.js';
-
-export const disableSubmit = () => {
-  const button = document.querySelector('.popup__submit-add-place');
-  button.classList.add('popup__submit_disabled');
-  button.disabled = true;
-}
 
 const showInputError = (formElement, inputElement, errorMessage, {inputErrorClass, errorClass}) => {
   const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
@@ -22,10 +15,10 @@ const hideInputError = (formElement, inputElement, {inputErrorClass, errorClass}
 
 const isValid = (formElement, inputElement, inputError) => {
   if (inputElement.validity.patternMismatch) {
-inputElement.setCustomValidity(inputElement.dataset.errorMessage);
-} else {
-inputElement.setCustomValidity("");
-}
+      inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+  } else {
+      inputElement.setCustomValidity("");
+  }
   if (!inputElement.validity.valid) {
       showInputError(formElement, inputElement, inputElement.validationMessage, inputError);
   } else {
@@ -61,11 +54,9 @@ const setEventListeners = (formElement, {inputSelector, submitButtonSelector, ..
   })
 }
 
-const enableValidation = ({formSelector, ...rest}) => {
+export const enableValidation = ({formSelector, ...rest}) => {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
       setEventListeners(formElement, rest);
   })
 }
-
-enableValidation(validationSelectors);

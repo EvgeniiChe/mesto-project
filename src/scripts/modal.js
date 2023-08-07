@@ -1,10 +1,32 @@
-import {inputUserName, inputUserCaption, popupEditProfile, userName, userCaption, popupFormEditProfile} from '../index.js';
+import {closeButtons} from '../index.js';
 
-//Сохранение введенных значений редактирования профиля (имени и профессии)
-popupFormEditProfile.addEventListener('submit', (event) => {
-  event.preventDefault(); 
-  userName.textContent = inputUserName.value;
-  userCaption.textContent = inputUserCaption.value;
-  closePopup(popupEditProfile);
+//Открытие и закрытие Popup 
+export function openPopup(popup) {
+    popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupByEsc);
+}
+export function closePopup(popup) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupByEsc); 
+}
+
+//closePopupByOverlay
+export const closePopupByOverlay = (evt) => {
+    if (evt.target.classList.contains('popup')) {
+        closePopup(evt.target);
+     }
+}
+
+//closePopupByEsc
+const closePopupByEsc = (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(document.querySelector('.popup_opened'));
+    }
+}
+
+export function closeAll() {
+closeButtons.forEach((button) => {
+    const popup = button.closest('.popup');
+    button.addEventListener('click', () => closePopup(popup));
 })
-
+}
