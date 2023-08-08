@@ -1,7 +1,7 @@
 import './pages/index.css';
 import {createCard} from './scripts/card.js';
 import {openPopup, closePopup, closePopupByOverlay, closeAll} from './scripts/modal.js'
-import {enableValidation} from './scripts/validate.js';
+import {enableValidation, disableSubmit} from './scripts/validate.js';
 const popupEditProfile = document.querySelector('.popup-edit-profile');
 const popupFormEditProfile = popupEditProfile.querySelector('.popup-form-edit-profile');
 const popupAddPlace = document.querySelector('.popup-add-place');
@@ -99,20 +99,8 @@ popupEditProfile.addEventListener('mousedown', closePopupByOverlay);
 popupAddPlace.addEventListener('mousedown', closePopupByOverlay);
 popupViewPhoto.addEventListener('mousedown', closePopupByOverlay);
 
-const disableSubmit = () => {
-  popupSubmitButton.classList.add('popup__submit_disabled');
-  popupSubmitButton.disabled = true;
-}
-
 //Вызов валидации
-enableValidation(
-  validationSelectors.formSelector,
-  validationSelectors.inputSelector,
-  validationSelectors.submitButtonSelector,
-  validationSelectors.inactiveButtonClass,
-  validationSelectors.inputErrorClass,
-  validationSelectors.errorActiveClass
-);
+enableValidation(validationSelectors);
 
 //Обработка Submit
 const handleCardFormSubmit = (evt) => {

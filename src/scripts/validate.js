@@ -1,4 +1,11 @@
 
+import {popupSubmitButton} from '../index.js';
+
+export const disableSubmit = () => {
+  popupSubmitButton.classList.add('popup__submit_disabled');
+  popupSubmitButton.disabled = true;
+}
+
 const showInputError = (formElement, inputElement, errorMessage, {inputErrorClass, errorClass}) => {
   const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
   inputElement.classList.add(inputErrorClass);
