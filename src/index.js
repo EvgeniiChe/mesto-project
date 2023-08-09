@@ -26,6 +26,8 @@ export const closeButtons = document.querySelectorAll('.popup__close');
 export const cardTemplate = document.querySelector('#card').content;
 const allCards = document.querySelector('.cards');
 export const popupSubmitButton = document.querySelector('.popup__submit');
+const popupSubmitAddPlaceBut = popupAddPlace.querySelector('.popup__submit');
+const popupSubmitEditProfileBut = popupEditProfile.querySelector('.popup__submit');
 
 import arkhyzImage from './images/arkhyz.jpg';
 import chelyabinskImage from './images/chelyabinsk-oblast.jpg';
@@ -87,9 +89,11 @@ export const validationSelectors = {
 //Открытие попапов
 addMestoButton.addEventListener('click', () => {
   openPopup(popupAddPlace);
+  disableSubmit(popupSubmitAddPlaceBut);
 })
 editProfileButton.addEventListener('click', () => {
   openPopup(popupEditProfile);
+  disableSubmit(popupSubmitEditProfileBut);
   inputUserName.value = userName.textContent;
   inputUserCaption.value = userCaption.textContent;
 })
@@ -114,7 +118,6 @@ const handleCardFormSubmit = (evt) => {
   evt.target.reset();
   renderCardItem(createCard(initialCardsNew));
   closePopup(popupAddPlace);
-  disableSubmit(popupAddPlace);
 }
 popupAddPlaceForm.addEventListener('submit', handleCardFormSubmit);
 

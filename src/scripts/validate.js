@@ -1,9 +1,7 @@
 
-import {popupSubmitButton} from '../index.js';
-
-export const disableSubmit = () => {
-  popupSubmitButton.classList.add('popup__submit_disabled');
-  popupSubmitButton.disabled = true;
+export const disableSubmit = (popupSubmitBut) => {
+  popupSubmitBut.classList.add('popup__submit_disabled');
+  popupSubmitBut.disabled = true;
 }
 
 const showInputError = (formElement, inputElement, errorMessage, {inputErrorClass, errorClass}) => {
