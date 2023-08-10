@@ -1,4 +1,4 @@
-import {closeButtons} from '../index.js';
+import {buttonsClose} from '../index.js';
 
 //Открытие и закрытие Popup 
 export function openPopup(popup) {
@@ -25,7 +25,7 @@ const closePopupByEsc = (evt) => {
 }
 
 export function closeAll() {
-closeButtons.forEach((button) => {
+buttonsClose.forEach((button) => {
     const popup = button.closest('.popup');
     button.addEventListener('click', () => closePopup(popup));
 })

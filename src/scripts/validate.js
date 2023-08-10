@@ -1,6 +1,6 @@
-
+import {validationSelectors} from '../index.js';
 export const disableSubmit = (popupSubmitBut) => {
-  popupSubmitBut.classList.add('popup__submit_disabled');
+  popupSubmitBut.classList.add(validationSelectors.inactiveButtonClass);
   popupSubmitBut.disabled = true;
 }
 
